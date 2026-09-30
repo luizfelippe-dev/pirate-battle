@@ -174,12 +174,18 @@ test("timeout after commit is recovered without duplicate records", async ({
 });
 test("visual baselines: harbor, stable arena and result", async ({ page }) => {
   await page.evaluate(() => document.fonts.ready);
-  await expect(page).toHaveScreenshot("harbor.png", { fullPage: true });
+  await expect(page).toHaveScreenshot("harbor.png", {
+    fullPage: true,
+    timeout: 15000,
+  });
   await start(page);
-  await expect(page).toHaveScreenshot("arena.png");
+  await expect(page).toHaveScreenshot("arena.png", { timeout: 15000 });
   await advance(page, 90);
   await expect(
     page.getByText("Voyage recorded in ranking and history."),
   ).toBeVisible();
-  await expect(page).toHaveScreenshot("result.png", { fullPage: true });
+  await expect(page).toHaveScreenshot("result.png", {
+    fullPage: true,
+    timeout: 15000,
+  });
 });

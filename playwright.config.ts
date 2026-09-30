@@ -6,7 +6,7 @@ export default defineConfig({
   timeout: 30000,
   expect: {
     timeout: 8000,
-    toHaveScreenshot: { maxDiffPixelRatio: 0.001, timeout: 15000 },
+    toHaveScreenshot: { maxDiffPixelRatio: 0.001 },
   },
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
