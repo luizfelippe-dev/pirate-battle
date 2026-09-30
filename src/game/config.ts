@@ -5,9 +5,9 @@ export interface Options {
 }
 export const defaults: Options = { duration: 90, spawnInterval: 4 };
 export const balance = {
-  version: 1,
+  version: 2,
   step: 1 / 120,
-  player: { health: 100, speed: 195, turn: 2.8, radius: 23 },
+  player: { health: 100, speed: 195, reverseSpeed: 110, turn: 2.8, radius: 23 },
   chaser: { health: 40, speed: 105, turn: 2, radius: 22, damage: 22 },
   shooter: {
     health: 60,

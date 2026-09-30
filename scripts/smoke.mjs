@@ -14,8 +14,21 @@ try {
   await page.getByRole("button", { name: "Ranking", exact: true }).click();
   await expect(page.getByText("Page 1 of 5")).toBeVisible();
   await page.reload();
+  await page.getByRole("button", { name: /Options/ }).click();
+  await page.getByLabel("Mouse firing", { exact: true }).check();
+  await page.getByRole("button", { name: "Save options" }).click();
+  await page.reload();
+  await page.getByRole("button", { name: /Options/ }).click();
+  await expect(page.getByLabel("Mouse firing", { exact: true })).toBeChecked();
+  await page.getByRole("button", { name: "Cancel", exact: true }).click();
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await expect(page.locator("canvas")).toBeVisible();
+  await page.locator("canvas").hover();
+  await page.mouse.down();
+  await page.keyboard.down("ArrowDown");
+  await page.waitForTimeout(300);
+  await page.keyboard.up("ArrowDown");
+  await page.mouse.up();
   await page.waitForTimeout(1200);
   await expect(page.getByTestId("time")).not.toHaveText("1:30");
   expect(
@@ -67,6 +80,8 @@ try {
       checks: [
         "ranking via MSW",
         "refresh",
+        "saved mouse preference",
+        "mouse fire with reverse input",
         "real-time combat",
         "no test hooks",
         "pause/resume",

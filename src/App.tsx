@@ -21,7 +21,10 @@ export function App() {
     [tab, setTab] = useState<"overview" | "ranking" | "history">("overview"),
     [last, setLast] = useState(() => read<Match | null>("last", null)),
     [queue, setQueue] = useState(pending),
-    [sound, setSound] = useState(() => read("sound", false));
+    [sound, setSound] = useState(() => read("sound", false)),
+    [mouseFire, setMouseFire] = useState(
+      () => read<boolean>("mouseFire", false) === true,
+    );
   const [scenario, setScenario] = useState(() =>
       read<Scenario>("scenario", "success"),
     ),
@@ -55,6 +58,7 @@ export function App() {
         onEnd={finish}
         onExit={() => setScreen("menu")}
         sound={sound}
+        mouseFire={mouseFire}
       />
     );
   return (
@@ -148,6 +152,7 @@ export function App() {
                   ref={optionsButton}
                   onClick={() => {
                     setFormError("");
+                    optionsDialog.current?.querySelector("form")?.reset();
                     optionsDialog.current?.showModal();
                   }}
                 >
@@ -246,11 +251,12 @@ export function App() {
                   <span>
                     <kbd>W</kbd>
                     <kbd>A</kbd>
+                    <kbd>S</kbd>
                     <kbd>D</kbd>
                   </span>
                   <div>
                     <b>Take the helm</b>
-                    <p>Forward, turn left, turn right. Arrow keys work too.</p>
+                    <p>Sail, reverse and turn. WASD or the arrow keys.</p>
                   </div>
                 </div>
                 <div>
@@ -279,7 +285,10 @@ export function App() {
                   Red sails close the distance. Dark sails fire from afar. Keep
                   an island between you and trouble.
                 </p>
-                <small>Touch controls on mobile · P to pause</small>
+                <small>
+                  Touch controls on mobile · Mouse firing in Options · P to
+                  pause
+                </small>
               </aside>
             </section>
           ) : (
@@ -351,7 +360,7 @@ export function App() {
             </small>
           </div>
         </details>
-        <span>REACT / PIXIJS</span>
+        <span>SAIL · SURVIVE · RETURN</span>
       </footer>
       <dialog
         ref={optionsDialog}
@@ -374,6 +383,9 @@ export function App() {
             }
             save("options", next);
             setOptions(next);
+            const useMouse = data.get("mouseFire") === "on";
+            save("mouseFire", useMouse);
+            setMouseFire(useMouse);
             optionsDialog.current?.close();
           }}
           noValidate
@@ -410,6 +422,21 @@ export function App() {
           <p className="small muted">
             Shorter intervals mean busier waters. Each voyage keeps the settings
             it started with.
+          </p>
+          <label className="check-option" htmlFor="mouse-fire">
+            <input
+              key={`mouse-${mouseFire}`}
+              id="mouse-fire"
+              name="mouseFire"
+              type="checkbox"
+              defaultChecked={mouseFire}
+              aria-describedby="mouse-help"
+            />
+            <span>Mouse firing</span>
+          </label>
+          <p className="small muted" id="mouse-help">
+            Left click: front cannon. Right click: both broadsides. Hold to
+            repeat. Keyboard controls stay available.
           </p>
           {formError && <p role="alert">{formError}</p>}
           <div className="actions">

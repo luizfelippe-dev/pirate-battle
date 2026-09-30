@@ -696,7 +696,7 @@ dialog > button {
   user-select: none;
   min-width: 62px;
 }
-.touch-controls button span {
+.touch-controls .control-label {
   display: block;
   font-size: 8px;
   margin-top: 6px;
@@ -927,12 +927,9 @@ dialog > button {
     padding: 12px 7px;
     flex: 1;
   }
-  .touch-controls button span {
+  .touch-controls .control-label {
     font-size: 7px;
     letter-spacing: 0;
-  }
-  .combat-footer .touch-controls button:nth-child(3) {
-    margin-right: 10px;
   }
   .combat .arena-frame {
     flex: 0 0 auto;
@@ -962,12 +959,181 @@ dialog > button {
   .touch-controls button {
     padding: 5px 12px;
   }
-  .touch-controls button span {
+  .touch-controls .control-label {
     display: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+  }
+}
+
+.check-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.check-option input {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  accent-color: #395d49;
+}
+.mouse-fire .canvas-host {
+  cursor: crosshair;
+}
+.helm-controls,
+.weapon-controls {
+  display: flex;
+  gap: 7px;
+}
+.touch-controls {
+  gap: 20px;
+}
+.touch-controls button {
+  position: relative;
+}
+.touch-controls .touch-symbol {
+  display: none;
+}
+.touch-controls .reload-track {
+  display: block;
+  height: 3px;
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 3px;
+  background: #0c2a30;
+  overflow: hidden;
+  border-radius: 3px;
+}
+.touch-controls .reload-track > span {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background: #d4b879;
+  transform-origin: left;
+}
+.touch-controls button:active {
+  background: #34605f;
+  border-color: #d4b879;
+}
+.control-list > div > span {
+  width: 116px;
+}
+
+@media (pointer: coarse) {
+  .combat {
+    position: relative;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .touch-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .helm-controls,
+  .weapon-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(2, 48px);
+    gap: 5px;
+  }
+  .helm-controls {
+    grid-template-areas: ". forward ." "left reverse right";
+  }
+  .weapon-controls {
+    grid-template-areas: ". front ." "port . starboard";
+  }
+  .touch-controls button {
+    min-width: 0;
+    min-height: 48px;
+    padding: 4px;
+    margin: 0;
+  }
+  .touch-controls [data-action="left"] {
+    grid-area: left;
+  }
+  .touch-controls [data-action="forward"] {
+    grid-area: forward;
+  }
+  .touch-controls [data-action="reverse"] {
+    grid-area: reverse;
+  }
+  .touch-controls [data-action="right"] {
+    grid-area: right;
+  }
+  .touch-controls [data-action="port"] {
+    grid-area: port;
+  }
+  .touch-controls [data-action="front"] {
+    grid-area: front;
+  }
+  .touch-controls [data-action="starboard"] {
+    grid-area: starboard;
+  }
+  .touch-controls kbd {
+    display: none;
+  }
+  .touch-controls .touch-symbol {
+    display: block;
+    margin: 0;
+    font-size: 25px;
+    line-height: 1;
+  }
+  .touch-controls .control-label {
+    font-size: 7px;
+    letter-spacing: 0;
+    margin: 2px 0 0;
+  }
+  .combat-footer {
+    padding: 10px 0 14px;
+  }
+}
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 600px) {
+  .combat .arena-frame {
+    width: calc(100% - 300px);
+  }
+  .combat-footer {
+    height: 0;
+    padding: 0;
+  }
+  .touch-controls {
+    position: absolute;
+    width: auto;
+    left: 8px;
+    right: 8px;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    pointer-events: none;
+  }
+  .helm-controls,
+  .weapon-controls {
+    pointer-events: auto;
+  }
+  .battle-hud {
+    height: 48px;
+  }
+  .touch-controls .control-label {
+    display: block;
+  }
+}
+@media (pointer: coarse) and (max-width: 359px) {
+  .helm-controls,
+  .weapon-controls {
+    grid-template-columns: repeat(3, 44px);
+    gap: 4px;
+  }
+}
+.touch-label {
+  display: none;
+}
+@media (pointer: coarse) {
+  .touch-controls .desktop-label {
+    display: none;
+  }
+  .touch-controls .touch-label {
+    display: inline;
+    white-space: nowrap;
   }
 }

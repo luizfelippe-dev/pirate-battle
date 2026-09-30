@@ -1,8 +1,8 @@
 # Verification
 
-The browser suite runs against the actual React/Pixi application with MSW enabled. Each test starts with an isolated browser context and empty origin storage. The seed is fixed. Test code may inspect simulation state and advance its clock; attacks and movement enter through keyboard or pointer events.
+The browser suite runs against the actual React/Pixi application with MSW enabled. Each test starts with an isolated browser context and empty origin storage. The seed is fixed. Test code may inspect simulation state and advance its clock; attacks and movement enter through keyboard or pointer events. With the test clock enabled, the Pixi ticker is stopped and the real renderer draws after clock advances or resize. Synchronous advances share one browser paint instead of submitting thousands of GPU frames. Idle software rendering no longer competes with browser assertions on CI. The normal build keeps its real-time ticker.
 
-On 30 September 2026, the final local run passed all 36 browser tests (18 desktop and 18 mobile) and all 11 simulation tests. TypeScript, ESLint, formatting and the production build also passed. The browser run took 4.2 minutes. Automated accessibility scans found no axe violations in the tested states; this is not a claim of complete accessibility compliance.
+On 30 September 2026, the final local run passed all 42 browser tests (21 desktop and 21 mobile) and all 14 simulation/input tests. TypeScript, ESLint, formatting and the production build also passed. The browser run took 2.1 minutes. Automated accessibility scans found no axe violations in the tested states; this is not a claim of complete accessibility compliance.
 
 ## Coverage
 
@@ -26,6 +26,8 @@ On 30 September 2026, the final local run passed all 36 browser tests (18 deskto
 
 The simulation unit suite adds frame-rate equivalence, projectile cooldown independence, unscored Chaser self-destruction, deterministic spawns, and frozen state after an ending. A separate steering test validates the profiling route at 30, 60 and 120 input updates per second.
 
+Additional control cases cover reverse through S/Down, independent release of aliases, saved mouse preference, cancelled edits, mixed keyboard/mouse fire, two simultaneous touch contacts, and viewport rotation. The input unit tests cover source ownership, pause cleanup, reverse bounds and opposed thrust.
+
 ## Reproduce
 
 ```sh
@@ -41,6 +43,8 @@ pnpm build
 The E2E runner starts its own Vite server with a controlled clock. Stop any other server on port 5173 first; reusing a server without `VITE_TEST_MODE=true` will not expose the clock.
 
 Screenshots in `tests/e2e/battle.spec.ts-snapshots/` cover the harbor, stable arena and result in desktop and mobile. These are Windows/Chromium baselines, using SwiftShader for reproducible rasterization. CI uses Windows to match. Fonts are bundled locally. To update intentionally, run `pnpm test:visual` and inspect all six images before committing.
+
+In the installed Playwright/Chromium combination, a full-page assertion resets touch emulation. The visual test restores it before entering combat and asserts that the mobile helm uses its touch layout, so the mobile arena baseline cannot silently capture desktop controls.
 
 Playwright creates `playwright-report/index.html`, screenshots on failures and retained failure traces under `test-results/`. CI uploads these directories even if a test fails. The final local HTML report is also copied into `docs/evidence/playwright-report/` for review without a rerun.
 

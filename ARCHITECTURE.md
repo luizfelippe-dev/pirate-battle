@@ -6,20 +6,22 @@ React owns the harbor, options, tables, result screen, pause dialog, and semanti
 
 `Combat` creates one simulation and one renderer for a mounted game. The ticker advances the simulation and then renders its state. React receives HUD snapshots at most ten times per active second; entity coordinates never enter React state. A match ID is created only on completion, and the completion callback has a one-shot guard.
 
+The E2E build stops the automatic ticker. Its controlled clock calls the real simulation and renderer together, and resizing still renders the viewport. This avoids continuously repainting frozen frames on a software GPU. Profiling and public builds use the normal ticker, so E2E timings are not presented as game performance measurements.
+
 The modules are deliberately small:
 
-| Module               | Responsibility                                              |
-| -------------------- | ----------------------------------------------------------- |
-| `game/config.ts`     | Arena, islands, validation and balance constants            |
-| `game/simulation.ts` | Fixed-step movement, AI, collision, weapons and match rules |
-| `game/input.ts`      | Keyboard event lifecycle and action mapping                 |
-| `game/renderer.ts`   | Texture loading, Pixi objects and viewport fitting          |
-| `game/audio.ts`      | Reusable sound instances and disposal                       |
-| `game/telemetry.ts`  | Opt-in frame and entity measurements                        |
-| `data/storage.ts`    | Persisted options, identity, results and pending queue      |
-| `data/api.ts`        | Axios client and Query defaults                             |
-| `data/mocks.ts`      | Shared REST handlers, fixtures and reproducible failures    |
-| `ui/Records.tsx`     | Paged ranking/history query states                          |
+| Module               | Responsibility                                                |
+| -------------------- | ------------------------------------------------------------- |
+| `game/config.ts`     | Arena, islands, validation and balance constants              |
+| `game/simulation.ts` | Fixed-step movement, AI, collision, weapons and match rules   |
+| `game/input.ts`      | Keyboard/mouse bindings and aggregation of held input sources |
+| `game/renderer.ts`   | Texture loading, Pixi objects and viewport fitting            |
+| `game/audio.ts`      | Reusable sound instances and disposal                         |
+| `game/telemetry.ts`  | Opt-in frame and entity measurements                          |
+| `data/storage.ts`    | Persisted options, identity, results and pending queue        |
+| `data/api.ts`        | Axios client and Query defaults                               |
+| `data/mocks.ts`      | Shared REST handlers, fixtures and reproducible failures      |
+| `ui/Records.tsx`     | Paged ranking/history query states                            |
 
 ## Simulation
 
@@ -44,6 +46,12 @@ Async initialization checks cancellation after texture loading and after applica
 The animated water uses a shared tile texture and active simulation time, so it freezes with the rest of the arena during pause. The repeated-mount investigation and remaining library resource retention are documented in [Performance](docs/PERFORMANCE.md).
 
 The world is fixed at 1200 × 720. A ResizeObserver fits it uniformly within the available rectangle and centers any letterboxing. Device resolution is capped at 2 to limit fill-rate cost. Touch controls express actions, not screen coordinates, so resizing cannot change input physics. Health bars stay above each ship independently of heading.
+
+`InputController` records the source of each held action. Space and the mouse may hold the same cannon; releasing one source leaves the other active. Pointer IDs separate simultaneous touches. Pause clears both source ownership and simulation input, and repeated keyboard events cannot restore a held key after resuming. Mouse listeners belong only to the arena and are installed only when the saved preference is enabled.
+
+Reverse thrust uses its own speed through the same collision system. Forward and reverse cancel each other. Balance version 2 separates these runs from scores produced before reverse was available. Mouse preference is an input choice, so it is persisted separately from the match's gameplay configuration. Weapon readiness is read into the same throttled HUD snapshot as score and health.
+
+Wake particles are renderer-only, expire after 1.2 seconds of active time, and are capped at 160. A single Graphics object draws them. They never enter combat collision or scoring, and their buffers are cleared on disposal.
 
 ## REST contracts
 

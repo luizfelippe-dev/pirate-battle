@@ -42,6 +42,7 @@ The Playwright server enables `VITE_TEST_MODE=true`: tests control the clock but
 | Action              | Keyboard            |
 | ------------------- | ------------------- |
 | Sail forward        | W / Up              |
+| Sail backward       | S / Down            |
 | Rotate              | A / Left, D / Right |
 | Front cannon        | Space               |
 | Port broadside      | Q                   |
@@ -49,6 +50,14 @@ The Playwright server enables `VITE_TEST_MODE=true`: tests control the clock but
 | Pause               | P / Escape          |
 
 Touch buttons support simultaneous movement and attacks. Both mobile orientations are supported; landscape gives the arena more usable space. The world always measures 1200 × 720 logical units and fits entirely on screen. Backgrounding the page or losing focus pauses the game. Resuming requires an explicit action and clears held inputs.
+
+Enable **Mouse firing** in Options to hold the left button for the front cannon and the right button for both broadsides. Click inside the arena; cannons follow the ship's heading. Keyboard weapons remain available, and releasing one device does not cancel another held input. The preference survives refresh. Cancel discards unsaved settings.
+
+Reverse moves at 110 units/s, compared with 195 units/s forward. It uses the same collision rules; pressing forward and reverse together stops thrust. This addition uses balance version 2, so its ranking excludes older version-1 matches. Older matches remain in history.
+
+On touch screens, the helm and weapon pads sit under separate thumbs. Landscape moves them beside the arena. Gold bars indicate weapon readiness. Water and wake animation use active game time; a reduced-motion system preference disables them when the next match starts.
+
+![Mobile landscape controls](docs/evidence/mobile-landscape.png)
 
 The sound toggle is off initially and persists locally. Red sails identify Chasers, which explode on contact. Dark sails identify Shooters, which fire within range. Islands stop ships and cannonballs. Damaged sails and hull bars show remaining health.
 

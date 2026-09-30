@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Simulation, type Action } from "../game/simulation";
+import { Simulation } from "../game/simulation";
 import { GameRenderer, loadTextures } from "../game/renderer";
-import { bindKeyboard } from "../game/input";
+import { bindKeyboard, bindMouse, InputController } from "../game/input";
+import { CombatControls } from "./CombatControls";
 import { AudioBus } from "../game/audio";
 import { balance, type Options } from "../game/config";
 import { playerId, type Match } from "../data/storage";
@@ -21,21 +22,29 @@ export function Combat({
   onEnd,
   onExit,
   sound,
+  mouseFire,
 }: {
   options: Options;
   onEnd: (m: Match) => void;
   onExit: () => void;
   sound: boolean;
+  mouseFire: boolean;
 }) {
   const host = useRef<HTMLDivElement>(null),
     simRef = useRef<Simulation | null>(null),
+    inputRef = useRef<InputController | null>(null),
     arenaRef = useRef<HTMLDivElement>(null),
     dialog = useRef<HTMLDialogElement>(null);
   const [loading, setLoading] = useState(0),
     [error, setError] = useState(""),
     [attempt, setAttempt] = useState(0),
     [paused, setPaused] = useState(false),
-    [hud, setHud] = useState({ score: 0, time: options.duration, hp: 100 });
+    [hud, setHud] = useState({
+      score: 0,
+      time: options.duration,
+      hp: 100,
+      weapons: { front: 1, port: 1, starboard: 1 },
+    });
   const callbacks = useRef({ onEnd, onExit });
   callbacks.current = { onEnd, onExit };
   const soundRef = useRef(sound);
@@ -46,17 +55,22 @@ export function Combat({
       cleanup = () => {},
       ready = false,
       finished = false,
+      pendingPaint = 0,
       lastHud = 0,
       lastEffect = 0;
     const sim = new Simulation(options),
+      input = new InputController(sim),
       audio = new AudioBus();
+    const testing = import.meta.env.VITE_TEST_MODE === "true";
     const telemetry =
       import.meta.env.VITE_PROFILE_MODE === "true" ? new Telemetry() : null;
     simRef.current = sim;
+    inputRef.current = input;
     setLoading(0);
     setError("");
     const pause = () => {
       if (!sim.ended) {
+        input.clear();
         sim.setPaused(true);
         setPaused(true);
       }
@@ -66,12 +80,21 @@ export function Combat({
     };
     const update = () => {
       if (!ready || cancelled) return;
-      renderer!.render(sim);
+      if (testing) {
+        if (!pendingPaint)
+          pendingPaint = requestAnimationFrame(() => {
+            pendingPaint = 0;
+            if (cancelled || !ready) return;
+            renderer!.render(sim);
+            renderer!.app.render();
+          });
+      } else renderer!.render(sim);
       if (sim.elapsed - lastHud > 0.1 || sim.ended) {
         setHud({
           score: sim.score,
           time: Math.ceil(options.duration - sim.elapsed),
           hp: sim.player.hp,
+          weapons: sim.weaponReadiness(),
         });
         lastHud = sim.elapsed;
       }
@@ -120,10 +143,16 @@ export function Combat({
         ready = true;
         setLoading(1);
         arenaRef.current?.focus();
-        cleanup = bindKeyboard(sim, pause);
+        const unbindKeyboard = bindKeyboard(input, pause);
+        const unbindMouse = mouseFire
+          ? bindMouse(input, host.current!)
+          : () => {};
+        cleanup = () => {
+          unbindKeyboard();
+          unbindMouse();
+        };
         window.addEventListener("blur", pause);
         document.addEventListener("visibilitychange", visibility);
-        const testing = import.meta.env.VITE_TEST_MODE === "true";
         if (telemetry)
           window.__profile = {
             state: () => ({
@@ -142,11 +171,13 @@ export function Combat({
               update();
             },
           };
-        view.app.ticker.add((ticker) => {
-          telemetry?.sample(performance.now(), sim);
-          if (!testing) sim.advance(Math.min(ticker.deltaMS / 1000, 0.1));
-          update();
-        });
+        if (testing) view.app.stop();
+        else
+          view.app.ticker.add((ticker) => {
+            telemetry?.sample(performance.now(), sim);
+            sim.advance(Math.min(ticker.deltaMS / 1000, 0.1));
+            update();
+          });
         update();
       } catch (e) {
         if (!cancelled)
@@ -157,6 +188,7 @@ export function Combat({
     })();
     return () => {
       cancelled = true;
+      cancelAnimationFrame(pendingPaint);
       cleanup();
       window.removeEventListener("blur", pause);
       document.removeEventListener("visibilitychange", visibility);
@@ -165,8 +197,9 @@ export function Combat({
       if (window.__battle?.sim === sim) delete window.__battle;
       if (telemetry) delete window.__profile;
       simRef.current = null;
+      inputRef.current = null;
     };
-  }, [options, attempt]);
+  }, [options, attempt, mouseFire]);
   useEffect(() => {
     if (paused) dialog.current?.showModal();
     else if (dialog.current?.open) {
@@ -175,17 +208,10 @@ export function Combat({
     }
   }, [paused]);
   const resume = () => {
+    inputRef.current?.clear();
     simRef.current?.setPaused(false);
     setPaused(false);
   };
-  const controls: { action: Action; label: string; key: string }[] = [
-    { action: "left", label: "Turn left", key: "A" },
-    { action: "forward", label: "Sail forward", key: "W" },
-    { action: "right", label: "Turn right", key: "D" },
-    { action: "port", label: "Port broadside", key: "Q" },
-    { action: "front", label: "Front cannon", key: "SPACE" },
-    { action: "starboard", label: "Starboard broadside", key: "E" },
-  ];
   return (
     <main className="combat" aria-label="Active voyage">
       <h1 className="sr-only">Pirate Battle — Active voyage</h1>
@@ -210,6 +236,7 @@ export function Combat({
         </div>
         <button
           onClick={() => {
+            inputRef.current?.clear();
             simRef.current?.setPaused(true);
             setPaused(true);
           }}
@@ -217,7 +244,11 @@ export function Combat({
           Pause <kbd>P</kbd>
         </button>
       </header>
-      <div className="arena-frame" ref={arenaRef} tabIndex={-1}>
+      <div
+        className={`arena-frame${mouseFire ? " mouse-fire" : ""}`}
+        ref={arenaRef}
+        tabIndex={-1}
+      >
         <div className="canvas-host" ref={host} />
         {loading < 1 && !error && (
           <div className="arena-message" role="status">
@@ -242,31 +273,13 @@ export function Combat({
         <span>
           THE SHATTERED ISLES{" "}
           <span className="muted">
-            / Keep moving. Make every broadside count.
+            /{" "}
+            {mouseFire
+              ? "Mouse: left fires ahead · right fires both sides"
+              : "WASD / arrows to sail · Hold fire to repeat"}
           </span>
         </span>
-        <div className="touch-controls">
-          {controls.map((c) => (
-            <button
-              key={c.action}
-              aria-label={c.label}
-              onPointerDown={(e) => {
-                e.preventDefault();
-                e.currentTarget.setPointerCapture(e.pointerId);
-                if (!simRef.current?.paused)
-                  simRef.current?.input.add(c.action);
-              }}
-              onPointerUp={() => simRef.current?.input.delete(c.action)}
-              onPointerCancel={() => simRef.current?.input.delete(c.action)}
-              onLostPointerCapture={() =>
-                simRef.current?.input.delete(c.action)
-              }
-            >
-              <kbd>{c.key}</kbd>
-              <span>{c.label}</span>
-            </button>
-          ))}
-        </div>
+        <CombatControls input={inputRef} readiness={hud.weapons} />
       </footer>
       <dialog
         ref={dialog}
@@ -279,6 +292,10 @@ export function Combat({
         <span className="eyebrow">ANCHOR DROPPED</span>
         <h2 id="pause-title">Take a breath, captain.</h2>
         <p>The sea can wait. Your time and weapons are paused.</p>
+        <p className="small">
+          WASD or arrows to sail · S / ↓ to reverse · Space / Q / E to fire
+          {mouseFire ? " · Mouse: left ahead, right both sides" : ""}
+        </p>
         <button className="primary" autoFocus onClick={resume}>
           Resume voyage
         </button>

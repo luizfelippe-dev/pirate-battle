@@ -1,6 +1,7 @@
 import { ARENA, balance as b, islands, type Options } from "./config";
 export type Action =
-  "forward" | "left" | "right" | "front" | "port" | "starboard";
+  "forward" | "reverse" | "left" | "right" | "front" | "port" | "starboard";
+export type Weapon = "front" | "port" | "starboard";
 export type Kind = "player" | "chaser" | "shooter";
 export interface Ship {
   id: number;
@@ -64,6 +65,13 @@ export class Simulation {
   private remainder = 0;
   private cooldowns = { front: 0, port: 0, starboard: 0 };
   private seed: number;
+  weaponReadiness(): Record<Weapon, number> {
+    return {
+      front: 1 - this.cooldowns.front / b.shot.frontCooldown,
+      port: 1 - this.cooldowns.port / b.shot.sideCooldown,
+      starboard: 1 - this.cooldowns.starboard / b.shot.sideCooldown,
+    };
+  }
   constructor(options: Options, seed = 7321) {
     this.config = Object.freeze({ ...options });
     this.seed = seed;
@@ -175,7 +183,10 @@ export class Simulation {
           b.player.turn *
           dt,
     );
-    if (this.input.has("forward")) this.move(p, b.player.speed, dt);
+    const thrust =
+      Number(this.input.has("forward")) - Number(this.input.has("reverse"));
+    if (thrust)
+      this.move(p, thrust > 0 ? b.player.speed : -b.player.reverseSpeed, dt);
     for (const weapon of ["front", "port", "starboard"] as const) {
       this.cooldowns[weapon] = Math.max(0, this.cooldowns[weapon] - dt);
       if (this.input.has(weapon) && this.cooldowns[weapon] === 0) {

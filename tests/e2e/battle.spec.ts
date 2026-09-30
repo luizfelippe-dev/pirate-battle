@@ -172,13 +172,26 @@ test("timeout after commit is recovered without duplicate records", async ({
     ),
   ).toBe(1);
 });
-test("visual baselines: harbor, stable arena and result", async ({ page }) => {
+test("visual baselines: harbor, stable arena and result", async ({
+  page,
+  isMobile,
+}) => {
   await page.evaluate(() => document.fonts.ready);
   await expect(page).toHaveScreenshot("harbor.png", {
     fullPage: true,
     timeout: 15000,
   });
+  if (isMobile) {
+    // Chromium's full-page capture resets touch emulation in this Playwright build.
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send("Emulation.setTouchEmulationEnabled", {
+      enabled: true,
+      maxTouchPoints: 1,
+    });
+  }
   await start(page);
+  if (isMobile)
+    await expect(page.locator(".helm-controls")).toHaveCSS("display", "grid");
   await expect(page).toHaveScreenshot("arena.png", { timeout: 15000 });
   await advance(page, 90);
   await expect(

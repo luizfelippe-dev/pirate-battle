@@ -49,6 +49,11 @@ export class GameRenderer {
   private blasts = new Map<number, Sprite>();
   private water = new Graphics();
   private waves: TilingSprite | null = null;
+  private wakeGraphics = new Graphics();
+  private wakePoints: { x: number; y: number; born: number }[] = [];
+  private wakeOrigins = new Map<number, { x: number; y: number }>();
+  private reducedMotion = matchMedia("(prefers-reduced-motion: reduce)")
+    .matches;
   private observer: ResizeObserver | null = null;
   async init(
     host: HTMLElement,
@@ -75,7 +80,7 @@ export class GameRenderer {
     this.waves.alpha = 0.19;
     this.waves.tint = 0x72b8bd;
     this.waves.tileScale.set(1.5);
-    this.scene.addChild(this.waves);
+    this.scene.addChild(this.waves, this.wakeGraphics);
     const land = new Graphics();
     const foliage = new Container();
     for (const i of islands) {
@@ -109,6 +114,7 @@ export class GameRenderer {
         (w - ARENA.width * s) / 2,
         (h - ARENA.height * s) / 2,
       );
+      this.app.render();
     };
     this.observer = new ResizeObserver(resize);
     this.observer.observe(host);
@@ -157,13 +163,41 @@ export class GameRenderer {
       view.health.circle(9, -6, 5).fill({ color: 0x45483f, alpha: 0.7 });
   }
   render(sim: Simulation) {
-    this.waves?.tilePosition.set(sim.elapsed * 3, sim.elapsed * 1.4);
+    if (!this.reducedMotion) {
+      this.waves?.tilePosition.set(sim.elapsed * 3, sim.elapsed * 1.4);
+      for (const ship of [sim.player, ...sim.enemies]) {
+        const origin = this.wakeOrigins.get(ship.id);
+        const dx = ship.x - (origin?.x ?? ship.x),
+          dy = ship.y - (origin?.y ?? ship.y);
+        const travelled = Math.hypot(dx, dy);
+        if (!origin || travelled > 14) {
+          this.wakeOrigins.set(ship.id, { x: ship.x, y: ship.y });
+          if (travelled > 14)
+            this.wakePoints.push({
+              x: ship.x - (dx / travelled) * 24,
+              y: ship.y - (dy / travelled) * 24,
+              born: sim.elapsed,
+            });
+        }
+      }
+      this.wakePoints = this.wakePoints
+        .filter((p) => sim.elapsed - p.born < 1.2)
+        .slice(-160);
+      this.wakeGraphics.clear();
+      for (const p of this.wakePoints) {
+        const age = (sim.elapsed - p.born) / 1.2;
+        this.wakeGraphics
+          .circle(p.x, p.y, 3 + age * 8)
+          .fill({ color: 0xd1ebe0, alpha: (1 - age) * 0.2 });
+      }
+    }
     for (const s of [sim.player, ...sim.enemies]) this.drawShip(s);
     const ids = new Set([0, ...sim.enemies.map((e) => e.id)]);
     for (const [id, view] of this.ships)
       if (!ids.has(id)) {
         view.root.destroy({ children: true, context: true });
         this.ships.delete(id);
+        this.wakeOrigins.delete(id);
       }
     this.bullets.clear();
     for (const s of sim.bullets) {
@@ -210,6 +244,8 @@ export class GameRenderer {
     this.observer?.disconnect();
     this.ships.clear();
     this.blasts.clear();
+    this.wakeOrigins.clear();
+    this.wakePoints = [];
     this.app.destroy(true, {
       children: true,
       context: true,
