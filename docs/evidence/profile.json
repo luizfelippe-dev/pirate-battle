@@ -1,0 +1,81 @@
+{
+  "date": "2026-09-30T13:52:00.047Z",
+  "environment": {
+    "os": "Windows_NT 10.0.26200",
+    "cpu": "Intel(R) Core(TM) i7-9700 CPU @ 3.00GHz",
+    "logicalCores": 8,
+    "ramGiB": 47.8,
+    "browser": "153.0.8010.12",
+    "gpu": "ANGLE (Intel, Intel(R) UHD Graphics 630 (0x00003E98) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "viewport": "1280 × 800",
+    "dpr": 1,
+    "headless": true
+  },
+  "config": {
+    "duration": 180,
+    "spawnInterval": 6,
+    "seed": 7321,
+    "sound": false
+  },
+  "combat": {
+    "frames": 10794,
+    "meanFps": 59.97602959133387,
+    "p95FrameMs": 17.899999856948853,
+    "maxEntities": 28,
+    "elapsed": 180,
+    "health": 88,
+    "score": 25,
+    "reason": "time"
+  },
+  "memory": [
+    {
+      "cycle": 0,
+      "Documents": 1,
+      "JSEventListeners": 209,
+      "Nodes": 319,
+      "JSHeapUsedSize": 7451556,
+      "canvases": 0
+    },
+    {
+      "cycle": 1,
+      "Documents": 1,
+      "JSEventListeners": 207,
+      "Nodes": 314,
+      "JSHeapUsedSize": 7660740,
+      "canvases": 0
+    },
+    {
+      "cycle": 2,
+      "Documents": 1,
+      "JSEventListeners": 214,
+      "Nodes": 392,
+      "JSHeapUsedSize": 7822640,
+      "canvases": 0
+    },
+    {
+      "cycle": 3,
+      "Documents": 1,
+      "JSEventListeners": 214,
+      "Nodes": 392,
+      "JSHeapUsedSize": 7885500,
+      "canvases": 0
+    },
+    {
+      "cycle": 4,
+      "Documents": 1,
+      "JSEventListeners": 207,
+      "Nodes": 314,
+      "JSHeapUsedSize": 7946072,
+      "canvases": 0
+    },
+    {
+      "cycle": 5,
+      "Documents": 1,
+      "JSEventListeners": 207,
+      "Nodes": 314,
+      "JSHeapUsedSize": 7984164,
+      "canvases": 0
+    }
+  ],
+  "errors": []
+}

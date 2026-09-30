@@ -1,0 +1,8 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.env.local
+.tools/
+game-developer-challenge-main/
+*.tsbuildinfo

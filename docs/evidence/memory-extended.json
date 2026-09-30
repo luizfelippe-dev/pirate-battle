@@ -1,0 +1,231 @@
+{
+  "date": "2026-09-30T13:58:19.307Z",
+  "samples": [
+    {
+      "cycle": 1,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 6824908,
+      "canvases": 0
+    },
+    {
+      "cycle": 2,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7056036,
+      "canvases": 0
+    },
+    {
+      "cycle": 3,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7236604,
+      "canvases": 0
+    },
+    {
+      "cycle": 4,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7398160,
+      "canvases": 0
+    },
+    {
+      "cycle": 5,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7504376,
+      "canvases": 0
+    },
+    {
+      "cycle": 6,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7540452,
+      "canvases": 0
+    },
+    {
+      "cycle": 7,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7561784,
+      "canvases": 0
+    },
+    {
+      "cycle": 8,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7602572,
+      "canvases": 0
+    },
+    {
+      "cycle": 9,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7870100,
+      "canvases": 0
+    },
+    {
+      "cycle": 10,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7906788,
+      "canvases": 0
+    },
+    {
+      "cycle": 11,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7941804,
+      "canvases": 0
+    },
+    {
+      "cycle": 12,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7949348,
+      "canvases": 0
+    },
+    {
+      "cycle": 13,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7966792,
+      "canvases": 0
+    },
+    {
+      "cycle": 14,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 7983176,
+      "canvases": 0
+    },
+    {
+      "cycle": 15,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8003448,
+      "canvases": 0
+    },
+    {
+      "cycle": 16,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8054496,
+      "canvases": 0
+    },
+    {
+      "cycle": 17,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8066256,
+      "canvases": 0
+    },
+    {
+      "cycle": 18,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8074808,
+      "canvases": 0
+    },
+    {
+      "cycle": 19,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8088912,
+      "canvases": 0
+    },
+    {
+      "cycle": 20,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8101960,
+      "canvases": 0
+    },
+    {
+      "cycle": 21,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8130264,
+      "canvases": 0
+    },
+    {
+      "cycle": 22,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8154664,
+      "canvases": 0
+    },
+    {
+      "cycle": 23,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8166636,
+      "canvases": 0
+    },
+    {
+      "cycle": 24,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8193624,
+      "canvases": 0
+    },
+    {
+      "cycle": 25,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 316,
+      "JSHeapUsedSize": 8205916,
+      "canvases": 0
+    }
+  ],
+  "retainedObjectChanges": [
+    {
+      "name": "Object",
+      "before": 2065,
+      "after": 2222,
+      "change": 157
+    },
+    {
+      "name": "Array",
+      "before": 684,
+      "after": 705,
+      "change": 21
+    },
+    {
+      "name": "ot",
+      "before": 7,
+      "after": 27,
+      "change": 20
+    },
+    {
+      "name": "i",
+      "before": 94,
+      "after": 114,
+      "change": 20
+    }
+  ]
+}

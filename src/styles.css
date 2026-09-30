@@ -1,0 +1,958 @@
+@import "@fontsource/dm-sans/latin-400.css";
+@import "@fontsource/dm-sans/latin-500.css";
+@import "@fontsource/dm-sans/latin-600.css";
+@import "@fontsource/dm-sans/latin-700.css";
+@import "@fontsource/libre-caslon-display/latin-400.css";
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #263b38;
+  background: #f3f0e6;
+  font-synthesis: none;
+  font-weight: 400;
+  --ink: #203c38;
+  --muted: #6b766d;
+  --line: #d9d9c9;
+  --gold: #ebca80;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+a,
+input,
+select,
+summary {
+  touch-action: manipulation;
+}
+button {
+  cursor: pointer;
+  border: 1px solid #bdc3b1;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink);
+  padding: 13px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background 0.18s,
+    transform 0.18s;
+}
+button:hover {
+  background: #e5e6d7;
+}
+button:active {
+  transform: translateY(1px);
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #bc672d;
+  outline-offset: 4px;
+}
+.primary {
+  background: var(--ink);
+  color: #fcf4dc;
+  border-color: var(--ink);
+}
+.primary:hover {
+  background: #345c50;
+}
+.app-shell {
+  max-width: 1440px;
+  padding: 0 64px;
+  margin: auto;
+}
+.site-header {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 40px;
+}
+.wordmark > span {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.wordmark small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 3px;
+  margin-top: 6px;
+}
+.header-right {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.edition,
+.eyebrow,
+.chart-label,
+.chart-bottom,
+.site-footer,
+.voyage-meta {
+  font-size: 10px;
+  letter-spacing: 1.6px;
+  font-weight: 600;
+}
+.sound {
+  border-radius: 30px;
+  padding: 9px 15px;
+  font-size: 11px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 50px;
+  padding: 64px 0 58px;
+  align-items: center;
+}
+.eyebrow {
+  color: #637467;
+}
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7d9066;
+  margin-right: 7px;
+}
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+h1,
+h2 {
+  font-family: "Libre Caslon Display", Georgia, serif;
+  font-weight: 400;
+}
+h1 {
+  font-size: clamp(56px, 5.8vw, 84px);
+  line-height: 0.99;
+  letter-spacing: -2px;
+  margin: 25px 0;
+}
+h1 em {
+  font-weight: 400;
+  color: #788565;
+}
+p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #647168;
+}
+.hero-copy > p {
+  max-width: 385px;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+.actions button {
+  min-width: 135px;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+}
+.voyage-meta {
+  display: flex;
+  gap: 27px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  margin-top: 36px;
+  font-size: 8px;
+  color: #7a8376;
+}
+.voyage-meta b {
+  display: block;
+  color: #455648;
+  font-size: 10px;
+  margin-bottom: 7px;
+}
+.chart {
+  height: 425px;
+  background: #b9d3c5;
+  position: relative;
+  overflow: hidden;
+  border: 8px solid #e5e5d5;
+  outline: 1px solid #d3d7c8;
+  box-shadow: 0 16px 28px #19362d09;
+  transform: rotate(1.4deg);
+}
+.chart-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#f6ffed24 1px, transparent 1px),
+    linear-gradient(90deg, #f6ffed24 1px, transparent 1px);
+  background-size: 45px 45px;
+}
+.chart-label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 8px;
+  color: #547b71;
+}
+.map-island {
+  position: absolute;
+  background: #899c71;
+  border: 8px solid #d9d6ae;
+  outline: 8px solid #d6e1c170;
+  box-shadow: inset 5px 7px #72885b55;
+  border-radius: 40% 60% 59% 41% / 61% 33% 67% 39%;
+  transform: rotate(-20deg);
+}
+.island-one {
+  width: 146px;
+  height: 110px;
+  top: 90px;
+  left: 40px;
+}
+.island-two {
+  width: 125px;
+  height: 90px;
+  bottom: 55px;
+  right: 37px;
+  transform: rotate(20deg);
+}
+.island-three {
+  width: 55px;
+  height: 53px;
+  top: 35px;
+  right: 60px;
+}
+.map-island span {
+  display: block;
+  text-align: center;
+  font-size: 8px;
+  letter-spacing: 1.6px;
+  margin-top: 28px;
+  color: #eaf0d7;
+  transform: rotate(20deg);
+}
+.island-two span {
+  transform: rotate(-20deg);
+  margin-top: 18px;
+}
+.route {
+  position: absolute;
+  width: 175px;
+  height: 215px;
+  border: 2px dashed #4c786c88;
+  border-radius: 50%;
+  top: 104px;
+  left: 39%;
+  transform: rotate(35deg);
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+.hero-ship {
+  position: absolute;
+  width: 67px;
+  top: 160px;
+  left: 53%;
+  transform: rotate(40deg);
+  filter: drop-shadow(9px 12px 2px #254e433b);
+}
+.enemy-ship {
+  position: absolute;
+  width: 41px;
+  bottom: 55px;
+  left: 80px;
+  transform: rotate(-48deg);
+  filter: drop-shadow(5px 7px 2px #254e433b);
+}
+.map-note {
+  position: absolute;
+  bottom: 46px;
+  left: 150px;
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #53776b;
+  font-size: 13px;
+  transform: rotate(-7deg);
+}
+.compass {
+  position: absolute;
+  top: 70px;
+  right: 21px;
+  text-align: center;
+  font: 9px Georgia;
+  color: #60867b;
+}
+.compass span {
+  display: block;
+  font-size: 55px;
+  line-height: 1;
+}
+.chart-bottom {
+  position: absolute;
+  bottom: 14px;
+  left: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 6px;
+  color: #53786e;
+}
+.tabs {
+  display: flex;
+  gap: 36px;
+  border-bottom: 1px solid var(--line);
+}
+.tabs button {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 18px 0;
+  border-radius: 0;
+  font-size: 13px;
+  color: #7b8378;
+}
+.tabs button[aria-current] {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.tabs button span {
+  font-size: 9px;
+  margin-left: 18px;
+  color: #8b9488;
+}
+.briefing {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 0.85fr;
+  gap: 50px;
+  padding: 36px 0 40px;
+}
+.briefing h2 {
+  font-size: 31px;
+  line-height: 1.1;
+  margin: 14px 0;
+}
+.briefing p {
+  font-size: 12px;
+}
+.control-list > div {
+  display: flex;
+  gap: 22px;
+  margin: 4px 0 20px;
+}
+.control-list > div > span {
+  width: 98px;
+  flex-shrink: 0;
+  display: flex;
+  gap: 5px;
+  padding-top: 2px;
+}
+.control-list b {
+  font-size: 12px;
+}
+.control-list p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+}
+kbd {
+  display: inline-block;
+  border: 1px solid #c1c8b7;
+  background: #e9eadd;
+  border-radius: 3px;
+  padding: 4px 7px;
+  font:
+    10px "DM Sans",
+    sans-serif;
+  box-shadow: 0 2px #d4dac7;
+}
+.briefing aside {
+  border-left: 1px solid var(--line);
+  padding-left: 30px;
+}
+.briefing aside p {
+  margin: 18px 0;
+}
+.briefing aside small {
+  font-size: 10px;
+  color: #6e7b6b;
+}
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  padding: 25px 0;
+  font-size: 8px;
+  color: #828a7b;
+}
+.site-footer details {
+  letter-spacing: 0;
+  font-size: 11px;
+}
+.site-footer summary {
+  cursor: pointer;
+}
+.network-panel {
+  display: grid;
+  gap: 10px;
+  margin: 15px 0;
+  max-width: 320px;
+}
+.network-panel small {
+  line-height: 1.5;
+}
+.network-panel select {
+  padding: 10px;
+}
+.last-voyage {
+  border: 0;
+  padding-left: 0;
+  margin-bottom: 24px;
+  font-size: 11px;
+}
+.records {
+  min-height: 335px;
+  padding: 30px 0;
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.section-heading h2 {
+  font-size: 30px;
+  margin: 10px 0 20px;
+}
+.tag {
+  font-size: 10px;
+  background: #e1e5d6;
+  padding: 8px 12px;
+  border-radius: 30px;
+}
+.table-scroll {
+  overflow: auto;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+  text-align: left;
+}
+th {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #72806e;
+  text-transform: uppercase;
+}
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+td:first-child {
+  color: #718263;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 11px;
+  margin-top: 18px;
+}
+.pagination > span:first-child {
+  margin-right: auto;
+}
+.pagination button {
+  padding: 8px 13px;
+}
+.empty {
+  padding: 24px;
+}
+.pending {
+  padding: 16px;
+  background: #e9dfbe;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 10px 0 20px;
+  flex-wrap: wrap;
+}
+.pending button {
+  padding: 9px 13px;
+}
+.result {
+  padding: 62px 15px;
+  text-align: center;
+  max-width: 900px;
+  margin: auto;
+}
+.result h1 {
+  font-size: 64px;
+}
+.result-score {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 30px 0;
+}
+.result-score span:first-child {
+  font:
+    110px "Libre Caslon Display",
+    Georgia;
+  color: #6b8060;
+  line-height: 1;
+}
+.result-score span:last-child {
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+.result-details {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  font-size: 12px;
+  margin: 25px 0;
+}
+.result .actions {
+  justify-content: center;
+}
+dialog {
+  border: 1px solid #a9b49c;
+  background: #f3f0e6;
+  color: var(--ink);
+  padding: 36px;
+  width: min(460px, calc(100% - 30px));
+  border-radius: 5px;
+  box-shadow: 0 30px 100px #092a3444;
+}
+dialog::backdrop {
+  background: #102f35a8;
+  backdrop-filter: blur(4px);
+}
+dialog h2 {
+  font-size: 36px;
+  line-height: 1.1;
+  margin: 16px 0;
+}
+dialog label {
+  display: block;
+  font-size: 13px;
+  margin: 20px 0 8px;
+}
+dialog label small {
+  color: #75816f;
+  float: right;
+}
+dialog input {
+  width: 100%;
+  border: 1px solid #aab99d;
+  padding: 12px;
+  background: #fffdf5;
+  border-radius: 3px;
+  color: var(--ink);
+}
+dialog > button {
+  margin: 8px 6px 8px 0;
+}
+.small {
+  font-size: 11px;
+}
+.muted {
+  color: #829082;
+}
+.combat {
+  height: 100dvh;
+  background: #102f36;
+  color: #e8ead5;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+}
+.battle-hud {
+  height: 82px;
+  display: flex;
+  gap: 42px;
+  align-items: center;
+  flex-shrink: 0;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+.battle-hud .brand-small {
+  margin-right: auto;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+.battle-hud .eyebrow {
+  display: block;
+  font-size: 8px;
+  color: #a6b8a4;
+  margin-bottom: 4px;
+}
+.battle-hud strong {
+  font-size: 23px;
+  font-weight: 500;
+}
+.battle-hud button {
+  color: #e9e8cf;
+  border-color: #608071;
+}
+.battle-hud kbd {
+  margin-left: 8px;
+  color: #203c38;
+}
+.arena-frame {
+  position: relative;
+  min-height: 0;
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+  outline: none;
+}
+.canvas-host {
+  position: absolute;
+  inset: 0;
+}
+.canvas-host canvas {
+  display: block;
+}
+.arena-message {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #183f43;
+  padding: 25px;
+  text-align: center;
+}
+.arena-message p {
+  color: #c8d8bc;
+}
+.arena-message button {
+  color: #e9e8cf;
+  margin: 8px;
+}
+.combat-footer {
+  padding: 17px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+.touch-controls {
+  display: flex;
+  gap: 7px;
+}
+.touch-controls button {
+  padding: 9px;
+  background: #1a4247;
+  border-color: #3f625b;
+  color: #d7dfc8;
+  touch-action: none;
+  user-select: none;
+  min-width: 62px;
+}
+.touch-controls button span {
+  display: block;
+  font-size: 8px;
+  margin-top: 6px;
+}
+.touch-controls kbd {
+  font-size: 9px;
+  color: #203c38;
+}
+.combat dialog p {
+  color: #647168;
+}
+@media (min-width: 1450px) {
+  .hero {
+    padding-top: 80px;
+    padding-bottom: 75px;
+  }
+  .chart {
+    height: 470px;
+  }
+}
+@media (max-width: 1000px) {
+  .app-shell {
+    padding: 0 30px;
+  }
+  .hero {
+    gap: 25px;
+  }
+  .chart {
+    height: 370px;
+  }
+  .hero h1 {
+    font-size: 65px;
+  }
+  .briefing {
+    gap: 25px;
+    grid-template-columns: 1fr 1.4fr;
+  }
+  .briefing aside {
+    display: none;
+  }
+  .combat-footer > span {
+    display: none;
+  }
+  .combat-footer {
+    justify-content: center;
+  }
+  .edition {
+    display: none;
+  }
+  .battle-hud {
+    gap: 20px;
+  }
+}
+@media (max-width: 650px) {
+  .app-shell {
+    padding: 0 22px;
+  }
+  .site-header {
+    height: 85px;
+  }
+  .wordmark > span {
+    font-size: 12px;
+  }
+  .wordmark {
+    font-size: 32px;
+  }
+  .wordmark small {
+    font-size: 6px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 36px 0 30px;
+    gap: 30px;
+  }
+  .hero h1 {
+    font-size: 64px;
+  }
+  .hero-copy > p {
+    max-width: 100%;
+  }
+  .hero .actions button {
+    flex: 1;
+  }
+  .voyage-meta {
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 25px;
+  }
+  .chart {
+    height: 305px;
+    transform: rotate(0.7deg);
+  }
+  .chart-label {
+    font-size: 7px;
+  }
+  .hero-ship {
+    top: 115px;
+    width: 55px;
+  }
+  .island-one {
+    top: 62px;
+    width: 118px;
+    height: 93px;
+    left: 25px;
+  }
+  .island-two {
+    width: 96px;
+    height: 73px;
+    right: 30px;
+    bottom: 38px;
+  }
+  .island-three {
+    right: 50px;
+    width: 40px;
+    height: 40px;
+    top: 28px;
+  }
+  .route {
+    top: 65px;
+    height: 166px;
+    width: 140px;
+  }
+  .enemy-ship {
+    width: 33px;
+    left: 55px;
+    bottom: 35px;
+  }
+  .map-note {
+    left: 112px;
+    bottom: 35px;
+    font-size: 11px;
+  }
+  .compass {
+    top: 60px;
+    right: 10px;
+  }
+  .compass span {
+    font-size: 38px;
+  }
+  .tabs {
+    gap: 26px;
+  }
+  .tabs button {
+    font-size: 12px;
+  }
+  .tabs button span {
+    margin-left: 8px;
+  }
+  .briefing {
+    grid-template-columns: 1fr;
+    padding-top: 28px;
+    gap: 10px;
+  }
+  .briefing h2 br {
+    display: none;
+  }
+  .briefing h2 {
+    font-size: 31px;
+  }
+  .site-footer {
+    font-size: 6px;
+    align-items: start;
+    gap: 8px;
+  }
+  .site-footer > span:last-child {
+    display: none;
+  }
+  .result {
+    padding: 40px 0;
+  }
+  .result h1 {
+    font-size: 49px;
+  }
+  .result-details {
+    gap: 12px;
+    font-size: 11px;
+  }
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  .section-heading h2 {
+    margin-bottom: 5px;
+  }
+  .pagination {
+    gap: 8px;
+    font-size: 9px;
+  }
+  .pagination button {
+    padding: 8px;
+  }
+  .combat {
+    padding: 0 8px;
+  }
+  .battle-hud {
+    height: 65px;
+    gap: 14px;
+  }
+  .battle-hud .brand-small {
+    display: none;
+  }
+  .battle-hud > div:first-of-type + div {
+    margin-right: auto;
+  }
+  .battle-hud strong {
+    font-size: 19px;
+  }
+  .battle-hud button {
+    padding: 10px;
+  }
+  .battle-hud button kbd {
+    display: none;
+  }
+  .combat-footer {
+    padding: 13px 0 22px;
+  }
+  .touch-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  .touch-controls button {
+    min-width: 0;
+    padding: 12px 7px;
+    flex: 1;
+  }
+  .touch-controls button span {
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+  .combat-footer .touch-controls button:nth-child(3) {
+    margin-right: 10px;
+  }
+  .combat .arena-frame {
+    flex: 0 0 auto;
+    aspect-ratio: 5/3;
+    margin: auto;
+  }
+  .combat-footer {
+    margin-top: auto;
+  }
+  .pending {
+    font-size: 11px;
+  }
+  dialog {
+    padding: 25px;
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .battle-hud {
+    height: 48px;
+  }
+  .battle-hud strong {
+    font-size: 17px;
+  }
+  .combat-footer {
+    padding: 5px 0;
+  }
+  .touch-controls button {
+    padding: 5px 12px;
+  }
+  .touch-controls button span {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

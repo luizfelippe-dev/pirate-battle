@@ -1,0 +1,1 @@
+VITE_PROFILE_MODE=true

@@ -1,0 +1,205 @@
+{
+  "date": "2026-09-30T13:54:25.241Z",
+  "samples": [
+    {
+      "cycle": 1,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 6804968,
+      "canvases": 0
+    },
+    {
+      "cycle": 2,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7057584,
+      "canvases": 0
+    },
+    {
+      "cycle": 3,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7238820,
+      "canvases": 0
+    },
+    {
+      "cycle": 4,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7399316,
+      "canvases": 0
+    },
+    {
+      "cycle": 5,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7506296,
+      "canvases": 0
+    },
+    {
+      "cycle": 6,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7542604,
+      "canvases": 0
+    },
+    {
+      "cycle": 7,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7565088,
+      "canvases": 0
+    },
+    {
+      "cycle": 8,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7603360,
+      "canvases": 0
+    },
+    {
+      "cycle": 9,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7853712,
+      "canvases": 0
+    },
+    {
+      "cycle": 10,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7895124,
+      "canvases": 0
+    },
+    {
+      "cycle": 11,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7927792,
+      "canvases": 0
+    },
+    {
+      "cycle": 12,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7937764,
+      "canvases": 0
+    },
+    {
+      "cycle": 13,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7955144,
+      "canvases": 0
+    },
+    {
+      "cycle": 14,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7965416,
+      "canvases": 0
+    },
+    {
+      "cycle": 15,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 7989128,
+      "canvases": 0
+    },
+    {
+      "cycle": 16,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8040496,
+      "canvases": 0
+    },
+    {
+      "cycle": 17,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8056452,
+      "canvases": 0
+    },
+    {
+      "cycle": 18,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8064540,
+      "canvases": 0
+    },
+    {
+      "cycle": 19,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8079132,
+      "canvases": 0
+    },
+    {
+      "cycle": 20,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8087000,
+      "canvases": 0
+    },
+    {
+      "cycle": 21,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8111344,
+      "canvases": 0
+    },
+    {
+      "cycle": 22,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8139600,
+      "canvases": 0
+    },
+    {
+      "cycle": 23,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8157800,
+      "canvases": 0
+    },
+    {
+      "cycle": 24,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8179260,
+      "canvases": 0
+    },
+    {
+      "cycle": 25,
+      "Documents": 1,
+      "JSEventListeners": 206,
+      "Nodes": 310,
+      "JSHeapUsedSize": 8188520,
+      "canvases": 0
+    }
+  ]
+}

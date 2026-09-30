@@ -1,0 +1,8 @@
+[build]
+command = "pnpm build"
+publish = "dist"
+
+[[headers]]
+for = "/mockServiceWorker.js"
+[headers.values]
+Cache-Control = "no-cache"
