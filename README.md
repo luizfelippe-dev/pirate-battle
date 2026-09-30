@@ -2,6 +2,8 @@
 
 A single-player naval survival game built for the Jungle Gaming frontend challenge. Sail around the islands, sink enemy ships, and survive until the timer runs out. A destroyed enemy is worth one point; a Chaser that rams the player is not.
 
+[Play the game](https://luizfelippe-dev.github.io/pirate-battle/) · [Verification workflow](https://github.com/luizfelippe-dev/pirate-battle/actions/workflows/verify.yml)
+
 ![Harbor menu](tests/e2e/battle.spec.ts-snapshots/harbor-desktop-win32.png)
 
 ## Run locally

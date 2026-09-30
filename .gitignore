@@ -2,6 +2,7 @@ node_modules/
 dist/
 test-results/
 playwright-report/
+!docs/evidence/playwright-report/
 .env.local
 .tools/
 game-developer-challenge-main/

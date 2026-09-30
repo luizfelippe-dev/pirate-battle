@@ -32,6 +32,9 @@ importers:
         specifier: ^19.2.0
         version: 19.3.0(react@19.3.0)
     devDependencies:
+      "@axe-core/playwright":
+        specifier: ^4.13.0
+        version: 4.13.0(playwright-core@1.63.0)
       "@eslint/js":
         specifier: ^9.36.0
         version: 9.39.5
@@ -73,6 +76,14 @@ importers:
         version: 3.2.7(@types/node@24.19.0)(msw@2.15.0(@types/node@24.19.0)(typescript@5.9.3))(supports-color@7.2.0)
 
 packages:
+  "@axe-core/playwright@4.13.0":
+    resolution:
+      {
+        integrity: sha512-6YLx+kxXu5GJceG4ozFg+33a2EMTdjYwWGloJ3sb9Kta5pp+ZNS53uxGVog5JetIY8s++P5UrtX+cri+u0VAVg==,
+      }
+    peerDependencies:
+      playwright-core: ">= 1.0.0"
+
   "@babel/code-frame@7.29.7":
     resolution:
       {
@@ -1236,6 +1247,13 @@ packages:
       {
         integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==,
       }
+
+  axe-core@4.13.0:
+    resolution:
+      {
+        integrity: sha512-UzGt8zg7Ny8djbYMhxl2zuEevVa7r2gJjYY5Lwr1xM7+XU2nd6CkIWFTVcCIbAP63vSz71NaVyyuSk9lHKcy0A==,
+      }
+    engines: { node: ">=4" }
 
   axios@1.20.0:
     resolution:
@@ -2680,6 +2698,11 @@ packages:
     engines: { node: ">=10" }
 
 snapshots:
+  "@axe-core/playwright@4.13.0(playwright-core@1.63.0)":
+    dependencies:
+      axe-core: 4.13.0
+      playwright-core: 1.63.0
+
   "@babel/code-frame@7.29.7":
     dependencies:
       "@babel/helper-validator-identifier": 7.29.7
@@ -3327,6 +3350,8 @@ snapshots:
   assertion-error@2.0.1: {}
 
   asynckit@0.4.0: {}
+
+  axe-core@4.13.0: {}
 
   axios@1.20.0(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0):
     dependencies:

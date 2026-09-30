@@ -43,7 +43,14 @@ export function Records({
         </div>
       ) : (
         <>
-          <div className="table-scroll">
+          <div
+            className="table-scroll"
+            tabIndex={0}
+            role="region"
+            aria-label={
+              kind === "ranking" ? "Ranking table" : "Match history table"
+            }
+          >
             <table>
               <thead>
                 <tr>

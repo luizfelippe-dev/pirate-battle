@@ -35,6 +35,30 @@ try {
     page.getByText("No voyages here yet.", { exact: false }),
   ).toBeVisible();
   expect(errors).toEqual([]);
+  if (process.argv.includes("--complete")) {
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await expect(
+      page.getByText("VOYAGE COMPLETE", { exact: true }),
+    ).toBeVisible({ timeout: 120000 });
+    await expect(
+      page.getByText("Voyage recorded in ranking and history."),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "Main Menu", exact: true }).click();
+    await page
+      .getByRole("button", { name: "Match History", exact: true })
+      .click();
+    await expect(
+      page.getByRole("cell", { name: "You", exact: true }),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "Ranking", exact: true }).click();
+    await expect(page.getByText("24 voyages")).toBeVisible();
+    await page.reload();
+    await page.getByRole("button", { name: /Last voyage/ }).click();
+    await expect(
+      page.getByText("Voyage recorded in ranking and history."),
+    ).toBeVisible();
+    expect(errors).toEqual([]);
+  }
   console.log(
     JSON.stringify({
       url,

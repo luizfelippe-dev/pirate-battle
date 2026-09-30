@@ -159,7 +159,7 @@ export function App() {
                   <b>{options.duration} SEC</b> PER VOYAGE
                 </span>
                 <span>
-                  <b>3 CANNONS</b> ONE CAPTAIN
+                  <b>3 WEAPONS</b> ONE CAPTAIN
                 </span>
                 <span>
                   <b>NO SAFE</b> PASSAGE

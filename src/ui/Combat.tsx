@@ -3,7 +3,7 @@ import { Simulation, type Action } from "../game/simulation";
 import { GameRenderer, loadTextures } from "../game/renderer";
 import { bindKeyboard } from "../game/input";
 import { AudioBus } from "../game/audio";
-import type { Options } from "../game/config";
+import { balance, type Options } from "../game/config";
 import { playerId, type Match } from "../data/storage";
 import { Telemetry, type ProfileReport } from "../game/telemetry";
 declare global {
@@ -100,7 +100,7 @@ export function Combat({
           duration: Number(sim.elapsed.toFixed(3)),
           reason: sim.ended,
           config: { ...sim.config },
-          version: 1,
+          version: balance.version,
         });
       }
     };
@@ -188,6 +188,7 @@ export function Combat({
   ];
   return (
     <main className="combat" aria-label="Active voyage">
+      <h1 className="sr-only">Pirate Battle — Active voyage</h1>
       <header className="battle-hud">
         <div className="brand-small">✦ PIRATE BATTLE</div>
         <div>

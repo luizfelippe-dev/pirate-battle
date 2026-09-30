@@ -1,7 +1,7 @@
 import { http, HttpResponse, delay, passthrough } from "msw";
 import { setupWorker } from "msw/browser";
 import { read, save, playerId, type Match } from "./storage";
-import { defaults, validOptions } from "../game/config";
+import { balance, defaults, validOptions } from "../game/config";
 import { basePath, assetUrl } from "../paths";
 export const scenarios = [
   "success",
@@ -38,7 +38,7 @@ export function fixtures(): Match[] {
     duration: 90,
     reason: "time",
     config: { ...defaults },
-    version: 1,
+    version: balance.version,
   }));
 }
 async function condition(resource: string) {
@@ -79,8 +79,9 @@ export const handlers = [
     const resource = String(params.resource);
     if (!["ranking", "history"].includes(resource))
       return new HttpResponse(null, { status: 404 });
+    const scenario = read<Scenario>("scenario", "success");
     const snapshot = records();
-    if (read<Scenario>("scenario", "success") === "populated") {
+    if (scenario === "populated") {
       snapshot.push(
         ...fixtures()
           .slice(0, 12)
@@ -96,7 +97,7 @@ export const handlers = [
     if (failure) return failure;
     const url = new URL(request.url),
       page = Math.max(1, Number(url.searchParams.get("page")) || 1);
-    const empty = read<Scenario>("scenario", "success") === "empty";
+    const empty = scenario === "empty";
     const rows = empty
       ? []
       : resource === "ranking"
@@ -107,7 +108,7 @@ export const handlers = [
                   Number(url.searchParams.get("duration")) &&
                 m.config.spawnInterval ===
                   Number(url.searchParams.get("spawnInterval")) &&
-                m.version === 1,
+                m.version === balance.version,
             )
             .sort(
               (a, c) =>
