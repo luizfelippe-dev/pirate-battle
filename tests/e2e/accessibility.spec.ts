@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { test, expect } from "./fixtures";
-test("harbor and options expose labeled controls with readable contrast", async ({
+test("harbor, options and records expose accessible controls and contrast", async ({
   page,
 }) => {
   await page.goto("/");
@@ -12,11 +12,6 @@ test("harbor and options expose labeled controls with readable contrast", async 
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: /Options/ })).toBeFocused();
-});
-test("records, combat, pause and result retain accessible semantics", async ({
-  page,
-}) => {
-  await page.goto("/");
   await page.getByRole("button", { name: "Ranking", exact: true }).click();
   await expect(page.getByText("Page 1 of 5")).toBeVisible();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
@@ -27,6 +22,11 @@ test("records, combat, pause and result retain accessible semantics", async ({
     page.getByText("No voyages here yet.", { exact: false }),
   ).toBeVisible();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+});
+test("combat, pause and result retain accessible semantics", async ({
+  page,
+}) => {
+  await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.waitForFunction(() => !!window.__battle);
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
