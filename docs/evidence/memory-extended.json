@@ -1,12 +1,12 @@
 {
-  "date": "2026-09-30T13:58:19.307Z",
+  "date": "2026-09-30T14:40:50.393Z",
   "samples": [
     {
       "cycle": 1,
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 6824908,
+      "JSHeapUsedSize": 6856844,
       "canvases": 0
     },
     {
@@ -14,7 +14,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7056036,
+      "JSHeapUsedSize": 7104788,
       "canvases": 0
     },
     {
@@ -22,7 +22,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7236604,
+      "JSHeapUsedSize": 7290568,
       "canvases": 0
     },
     {
@@ -30,7 +30,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7398160,
+      "JSHeapUsedSize": 7444892,
       "canvases": 0
     },
     {
@@ -38,7 +38,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7504376,
+      "JSHeapUsedSize": 7570240,
       "canvases": 0
     },
     {
@@ -46,7 +46,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7540452,
+      "JSHeapUsedSize": 7614868,
       "canvases": 0
     },
     {
@@ -54,7 +54,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7561784,
+      "JSHeapUsedSize": 7639212,
       "canvases": 0
     },
     {
@@ -62,7 +62,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7602572,
+      "JSHeapUsedSize": 7697272,
       "canvases": 0
     },
     {
@@ -70,7 +70,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7870100,
+      "JSHeapUsedSize": 7946892,
       "canvases": 0
     },
     {
@@ -78,7 +78,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7906788,
+      "JSHeapUsedSize": 7988836,
       "canvases": 0
     },
     {
@@ -86,7 +86,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7941804,
+      "JSHeapUsedSize": 8018576,
       "canvases": 0
     },
     {
@@ -94,7 +94,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7949348,
+      "JSHeapUsedSize": 8028180,
       "canvases": 0
     },
     {
@@ -102,7 +102,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7966792,
+      "JSHeapUsedSize": 8047616,
       "canvases": 0
     },
     {
@@ -110,7 +110,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 7983176,
+      "JSHeapUsedSize": 8060636,
       "canvases": 0
     },
     {
@@ -118,7 +118,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8003448,
+      "JSHeapUsedSize": 8097408,
       "canvases": 0
     },
     {
@@ -126,7 +126,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8054496,
+      "JSHeapUsedSize": 8144612,
       "canvases": 0
     },
     {
@@ -134,7 +134,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8066256,
+      "JSHeapUsedSize": 8155464,
       "canvases": 0
     },
     {
@@ -142,7 +142,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8074808,
+      "JSHeapUsedSize": 8169656,
       "canvases": 0
     },
     {
@@ -150,7 +150,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8088912,
+      "JSHeapUsedSize": 8201320,
       "canvases": 0
     },
     {
@@ -158,7 +158,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8101960,
+      "JSHeapUsedSize": 8222664,
       "canvases": 0
     },
     {
@@ -166,7 +166,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8130264,
+      "JSHeapUsedSize": 8242040,
       "canvases": 0
     },
     {
@@ -174,7 +174,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8154664,
+      "JSHeapUsedSize": 8251724,
       "canvases": 0
     },
     {
@@ -182,7 +182,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8166636,
+      "JSHeapUsedSize": 8260144,
       "canvases": 0
     },
     {
@@ -190,7 +190,7 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8193624,
+      "JSHeapUsedSize": 8279900,
       "canvases": 0
     },
     {
@@ -198,33 +198,33 @@
       "Documents": 1,
       "JSEventListeners": 206,
       "Nodes": 316,
-      "JSHeapUsedSize": 8205916,
+      "JSHeapUsedSize": 8291260,
       "canvases": 0
     }
   ],
   "retainedObjectChanges": [
     {
       "name": "Object",
-      "before": 2065,
-      "after": 2222,
-      "change": 157
+      "before": 2100,
+      "after": 2278,
+      "change": 178
     },
     {
       "name": "Array",
-      "before": 684,
-      "after": 705,
+      "before": 696,
+      "after": 717,
       "change": 21
     },
     {
-      "name": "ot",
-      "before": 7,
-      "after": 27,
+      "name": "i",
+      "before": 107,
+      "after": 127,
       "change": 20
     },
     {
-      "name": "i",
-      "before": 94,
-      "after": 114,
+      "name": "ct",
+      "before": 7,
+      "after": 27,
       "change": 20
     }
   ]

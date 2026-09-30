@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPage } from "../data/api";
 import type { Options } from "../game/config";
 export function Records({
@@ -15,6 +15,9 @@ export function Records({
     queryFn: ({ signal }) => getPage(kind, page, options, signal),
     refetchOnMount: "always",
   });
+  useEffect(() => {
+    if (query.data && page > query.data.pages) setPage(query.data.pages);
+  }, [page, query.data]);
   return (
     <section className="records">
       <div className="section-heading">

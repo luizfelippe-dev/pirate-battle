@@ -62,6 +62,7 @@ try {
   console.log(
     JSON.stringify({
       url,
+      date: new Date().toISOString(),
       status: "passed",
       checks: [
         "ranking via MSW",
@@ -71,6 +72,13 @@ try {
         "pause/resume",
         "abandonment",
         "empty history",
+        ...(process.argv.includes("--complete")
+          ? [
+              "completed real-time match",
+              "registered once in both panels",
+              "persisted result after refresh",
+            ]
+          : []),
       ],
       errors,
     }),

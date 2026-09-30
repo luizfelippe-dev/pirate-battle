@@ -1,30 +1,11 @@
 import { chromium } from "@playwright/test";
-import { spawn } from "node:child_process";
+import { startPreview } from "./preview-server.mjs";
 import { mkdir, writeFile } from "node:fs/promises";
 import os from "node:os";
 
-const server = spawn(
-  process.execPath,
-  [
-    "node_modules/vite/bin/vite.js",
-    "preview",
-    "--host",
-    "127.0.0.1",
-    "--port",
-    "4173",
-  ],
-  { stdio: "pipe", windowsHide: true },
-);
+const server = await startPreview(4173);
 let browser;
 try {
-  for (let i = 0; i < 100; i++) {
-    try {
-      if ((await fetch("http://127.0.0.1:4173")).ok) break;
-    } catch {
-      // The preview process may not be listening yet.
-    }
-    await new Promise((r) => setTimeout(r, 100));
-  }
   browser = await chromium.launch({
     args:
       process.platform === "win32" ? ["--use-angle=d3d11", "--enable-gpu"] : [],
@@ -164,5 +145,5 @@ try {
   console.log(JSON.stringify(report, null, 2));
 } finally {
   await browser?.close();
-  server.kill();
+  server.stop();
 }

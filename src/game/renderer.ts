@@ -4,6 +4,7 @@ import {
   Container,
   Graphics,
   Sprite,
+  TilingSprite,
   type Texture,
 } from "pixi.js";
 import { ARENA, islands } from "./config";
@@ -22,6 +23,8 @@ const paths = {
   blast: "/assets/png/default/effects/explosion_1.png",
   blast2: "/assets/png/default/effects/explosion_2.png",
   blast3: "/assets/png/default/effects/explosion_3.png",
+  water: "/assets/png/default/tiles/tile_73.png",
+  palm: "/assets/png/default/tiles/tile_71.png",
 };
 export async function loadTextures(progress: (value: number) => void) {
   let done = 0;
@@ -45,6 +48,7 @@ export class GameRenderer {
   private effects = new Graphics();
   private blasts = new Map<number, Sprite>();
   private water = new Graphics();
+  private waves: TilingSprite | null = null;
   private observer: ResizeObserver | null = null;
   async init(
     host: HTMLElement,
@@ -63,7 +67,17 @@ export class GameRenderer {
     this.app.stage.addChild(this.scene);
     this.scene.addChild(this.water);
     this.drawWater();
+    this.waves = new TilingSprite({
+      texture: this.textures.water,
+      width: ARENA.width,
+      height: ARENA.height,
+    });
+    this.waves.alpha = 0.19;
+    this.waves.tint = 0x72b8bd;
+    this.waves.tileScale.set(1.5);
+    this.scene.addChild(this.waves);
     const land = new Graphics();
+    const foliage = new Container();
     for (const i of islands) {
       land
         .circle(i.x + 4, i.y + 7, i.radius + 13)
@@ -76,17 +90,15 @@ export class GameRenderer {
         const x = i.x + (n - 1) * 24,
           y = i.y + (n % 2) * 23 - 14;
         land.circle(x + 3, y + 5, 16).fill({ color: 0x345f40, alpha: 0.4 });
-        for (let k = 0; k < 5; k++) {
-          const a = (k * Math.PI * 2) / 5;
-          land
-            .moveTo(x, y)
-            .lineTo(x + Math.cos(a) * 24, y + Math.sin(a) * 24)
-            .stroke({ width: 8, color: 0x365e3f });
-        }
-        land.circle(x, y, 6).fill(0xa18a51);
+        const palm = new Sprite(this.textures.palm);
+        palm.anchor.set(0.5);
+        palm.position.set(x, y);
+        palm.width = palm.height = 55;
+        palm.rotation = n * 1.7;
+        foliage.addChild(palm);
       }
     }
-    this.scene.addChild(land, this.bullets, this.effects);
+    this.scene.addChild(land, foliage, this.bullets, this.effects);
     const resize = () => {
       const w = host.clientWidth,
         h = host.clientHeight;
@@ -105,13 +117,6 @@ export class GameRenderer {
   private textures!: Record<keyof typeof paths, Texture>;
   private drawWater() {
     this.water.rect(0, 0, 1200, 720).fill(0x237b8b);
-    for (let y = 18; y < 720; y += 44)
-      for (let x = 12; x < 1200; x += 65) {
-        this.water
-          .moveTo(x + (y % 3) * 8, y)
-          .quadraticCurveTo(x + 12, y + 5, x + 25, y)
-          .stroke({ color: 0x89d3d1, alpha: 0.19, width: 2 });
-      }
     this.water
       .rect(2, 2, 1196, 716)
       .stroke({ color: 0xb5dbca, alpha: 0.35, width: 3 });
@@ -152,6 +157,7 @@ export class GameRenderer {
       view.health.circle(9, -6, 5).fill({ color: 0x45483f, alpha: 0.7 });
   }
   render(sim: Simulation) {
+    this.waves?.tilePosition.set(sim.elapsed * 3, sim.elapsed * 1.4);
     for (const s of [sim.player, ...sim.enemies]) this.drawShip(s);
     const ids = new Set([0, ...sim.enemies.map((e) => e.id)]);
     for (const [id, view] of this.ships)

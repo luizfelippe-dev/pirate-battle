@@ -2,24 +2,27 @@
 
 The browser suite runs against the actual React/Pixi application with MSW enabled. Each test starts with an isolated browser context and empty origin storage. The seed is fixed. Test code may inspect simulation state and advance its clock; attacks and movement enter through keyboard or pointer events.
 
+On 30 September 2026, the final local run passed all 36 browser tests (18 desktop and 18 mobile) and all 11 simulation tests. TypeScript, ESLint, formatting and the production build also passed. The browser run took 4.2 minutes. Automated accessibility scans found no axe violations in the tested states; this is not a claim of complete accessibility compliance.
+
 ## Coverage
 
-| Area        | Checks                                                                          |
-| ----------- | ------------------------------------------------------------------------------- |
-| Options     | Limits, accessible validation, saved values after reload                        |
-| Assets      | Visible loading, rejected texture request, successful retry                     |
-| Movement    | Forward motion, rotation, arena bounds, island collision                        |
-| Weapons     | Front/port/starboard, parallel shots, cooldown, single scoring                  |
-| Enemies     | Spawn timing, both types, pursuit, Shooter projectiles                          |
-| Endings     | Death, successful timed voyage, clean restart                                   |
-| Pause       | Manual and blur pause, frozen clock, explicit resume, cleared input             |
-| Results     | Completion state, persistence, upload status                                    |
-| Lifecycle   | Repeated start/abandon, one canvas during play and none after exit              |
-| Mobile      | Pixel 7 emulation, pointer movement, responsive visual baselines                |
-| Queries     | Loading, empty, errors, ranking/history pagination, recovery                    |
-| Writes      | Both panels updated, durable pending entry, retry after refresh                 |
-| Consistency | Timeout after commit returns one record; stale reads cannot replace newer state |
-| Runtime     | Every browser test fails on an unhandled page error                             |
+| Area          | Checks                                                                                         |
+| ------------- | ---------------------------------------------------------------------------------------------- |
+| Options       | Limits, accessible validation, saved values after reload                                       |
+| Assets        | Visible loading, rejected texture request, successful retry                                    |
+| Movement      | Forward motion, rotation, arena bounds, island collision                                       |
+| Weapons       | Front/port/starboard, parallel shots, cooldown, single scoring                                 |
+| Enemies       | Spawn timing, both types, pursuit, Shooter projectiles                                         |
+| Endings       | Death, successful timed voyage, clean restart                                                  |
+| Pause         | Manual and blur pause, frozen clock, explicit resume, cleared input                            |
+| Results       | Completion state, persistence, upload status                                                   |
+| Lifecycle     | Repeated start/abandon, one canvas during play and none after exit                             |
+| Mobile        | Pixel 7 emulation, pointer movement, responsive visual baselines                               |
+| Queries       | Loading, empty, errors, ranking/history pagination, recovery                                   |
+| Writes        | Both panels updated, durable pending entry, retry after refresh                                |
+| Consistency   | Timeout after commit returns one record; stale reads cannot replace newer state                |
+| Accessibility | Automated axe checks across menus, tables, combat, pause and results; dialog focus restoration |
+| Runtime       | Every browser test fails on an unhandled page error                                            |
 
 The simulation unit suite adds frame-rate equivalence, projectile cooldown independence, unscored Chaser self-destruction, deterministic spawns, and frozen state after an ending. A separate steering test validates the profiling route at 30, 60 and 120 input updates per second.
 

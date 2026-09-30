@@ -41,6 +41,8 @@ Time and health endings lock the simulation. Calls to `advance` after an ending 
 
 Async initialization checks cancellation after texture loading and after application initialization. If React Strict Mode unmounts a pending initialization, that instance never attaches listeners or starts combat. Shared texture sources are retained intentionally; destroying them per match would invalidate the global asset cache.
 
+The animated water uses a shared tile texture and active simulation time, so it freezes with the rest of the arena during pause. The repeated-mount investigation and remaining library resource retention are documented in [Performance](docs/PERFORMANCE.md).
+
 The world is fixed at 1200 × 720. A ResizeObserver fits it uniformly within the available rectangle and centers any letterboxing. Device resolution is capped at 2 to limit fill-rate cost. Touch controls express actions, not screen coordinates, so resizing cannot change input physics. Health bars stay above each ship independently of heading.
 
 ## REST contracts
