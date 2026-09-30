@@ -46,6 +46,16 @@ Playwright creates `playwright-report/index.html`, screenshots on failures and r
 
 Expected HTTP failures from selected network scenarios may appear in browser network diagnostics. They are handled by the UI. They are distinct from unhandled JavaScript errors, which the suite rejects.
 
+## Public deployment
+
+The GitHub Pages build of `f8a8658` passed a fresh-browser smoke test on 30 September 2026. It loaded the ranking through MSW, survived refresh, ran the normal combat clock without test hooks, paused/resumed, abandoned without recording, and completed another match. That result appeared once in ranking and history and remained available after refresh. There were no unhandled browser errors. The raw result is in [public-smoke.json](evidence/public-smoke.json).
+
+```sh
+node scripts/smoke.mjs https://luizfelippe-dev.github.io/pirate-battle/ --complete
+```
+
+This test uses the published build and waits for a real-time match ending. The controlled network failure cases are covered by the browser suite above.
+
 ## Manual checks still matter
 
-Mobile results are browser emulation, not physical-device measurements. Hardware audio output and a physical multitouch screen need a manual pass. The public deployment also needs a fresh-browser smoke test after its URL exists; local results cannot establish that a hosting configuration works.
+Mobile results are browser emulation, not physical-device measurements. Hardware audio output and a physical multitouch screen need a manual pass. Automated axe scans also cannot establish how usable a fast visual action game is for every player.
