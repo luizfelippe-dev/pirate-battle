@@ -60,6 +60,14 @@ node scripts/smoke.mjs https://luizfelippe-dev.github.io/pirate-battle/ --comple
 
 This test uses the published build and waits for a real-time match ending. The controlled network failure cases are covered by the browser suite above.
 
+The published build of `3c634d7` also passed the mobile/audio smoke check on 1 October 2026 UTC. Pixel 7 emulation covered 393 × 727, 844 × 390 and 320 × 568 viewports. The arena, HUD and controls stayed inside each viewport without horizontal overflow. Two simultaneous touches exercised sailing and cannon fire; the weapon cooldown indicator responded. Pause froze the clock and resume advanced it again.
+
+The check observed the browser's real media playback promises: cannon audio started without rejection, the sound preference survived refresh in both states, muted combat created no audio instances, and abandoning disposed the active audio. This checks browser playback, not audible output from physical speakers. Results are in [mobile-smoke.json](evidence/mobile-smoke.json).
+
+```sh
+node scripts/smoke-mobile.mjs https://luizfelippe-dev.github.io/pirate-battle/
+```
+
 ## Manual checks still matter
 
 Mobile results are browser emulation, not physical-device measurements. Hardware audio output and a physical multitouch screen need a manual pass. Automated axe scans also cannot establish how usable a fast visual action game is for every player.
