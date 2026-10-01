@@ -1,6 +1,6 @@
 # Performance
 
-Measured on 30 September 2026 using a production Vite build. Raw measurements are in [profile.json](evidence/profile.json), with the result screen in [profile-result.png](evidence/profile-result.png).
+Measured on 30 September 2026 using a production Vite build of balance version 2, including the water and ship wake effects. Raw measurements are in [profile.json](evidence/profile.json), with the result screen in [profile-result.png](evidence/profile-result.png).
 
 ## Three-minute voyage
 
@@ -19,11 +19,11 @@ Measured on 30 September 2026 using a production Vite build. Raw measurements ar
 | Measurement                    | Result                                             |
 | ------------------------------ | -------------------------------------------------- |
 | Active simulation time         | 180 seconds                                        |
-| Render intervals recorded      | 10,794                                             |
-| Mean frame rate                | 59.98 FPS                                          |
+| Render intervals recorded      | 10,795                                             |
+| Mean frame rate                | 60.00 FPS                                          |
 | 95th-percentile frame interval | 17.80 ms                                           |
-| Peak entities                  | 26, including player, enemies, bullets and effects |
-| Outcome                        | Survived, 26 points, 88 health                     |
+| Peak entities                  | 28, including player, enemies, bullets and effects |
+| Outcome                        | Survived, 25 points, 88 health                     |
 | Unhandled browser errors       | 0                                                  |
 
 The frame interval includes browser scheduling as well as game work; it is not CPU render time alone. The six-second spawn interval makes the automated route reliably survive the full measurement. It is a supported configuration, but less dense than the four-second default. This does not establish a 60 FPS guarantee for the one-second extreme.
@@ -32,9 +32,9 @@ An earlier run selected SwiftShader software rendering automatically. It measure
 
 ## Repeated mounting
 
-The main run then starts, plays for three seconds, pauses and abandons five games. Each sample follows explicit garbage collection through Chromium's debugging protocol. All samples have one document and zero remaining canvases. Listener/node counts return to their prior range. JavaScript heap grows from 7.51 MB before the cycles to 8.09 MB after five cycles.
+The main run then starts, plays for three seconds, pauses and abandons five games. Each sample follows explicit garbage collection through Chromium's debugging protocol. All samples have one document and zero remaining canvases. Listener/node counts return to their prior range. JavaScript heap grows from 7.64 MB before the cycles to 8.21 MB after five cycles.
 
-I investigated that increase with a separate 25-cycle run and heap snapshots at cycles 5 and 25. The lifecycle now explicitly destroys owned Graphics contexts as well as containers, while retaining shared asset textures. In the extended run, document, DOM node and event listener counts stayed fixed at 1, 316 and 206; canvases returned to zero each time. The heap grew from 6.86 MB to 8.29 MB, mostly during warm-up, with a smaller increase continuing later.
+I investigated that increase with a separate 25-cycle run and heap snapshots at cycles 5 and 25. The lifecycle now explicitly destroys owned Graphics contexts as well as containers, while retaining shared asset textures. In the extended run, document, DOM node and event listener counts stayed fixed at 1, 324 and 207; canvases returned to zero each time. The heap grew from 6.90 MB to 8.36 MB, mostly during warm-up, with a smaller increase continuing later.
 
 The object-count comparison still found 20 additional Pixi BindGroup objects after 20 further mounts, plus associated arrays/objects. This is a small retained-resource issue in the current renderer/library lifecycle, not an ever-growing active arena or listener tree. It is recorded as a limitation rather than claiming the runtime is leak-free. The object counts and samples are in `evidence/memory-extended.json`; the earlier run is in `evidence/memory-before-context-disposal.json`.
 

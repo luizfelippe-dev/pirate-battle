@@ -52,7 +52,7 @@ Expected HTTP failures from selected network scenarios may appear in browser net
 
 ## Public deployment
 
-The GitHub Pages build of `f8a8658` passed a fresh-browser smoke test on 30 September 2026. It loaded the ranking through MSW, survived refresh, ran the normal combat clock without test hooks, paused/resumed, abandoned without recording, and completed another match. That result appeared once in ranking and history and remained available after refresh. There were no unhandled browser errors. The raw result is in [public-smoke.json](evidence/public-smoke.json).
+The GitHub Pages build of `021abf6` passed a fresh-browser smoke test on 1 October 2026 UTC (30 September locally). The same commit passed the [Windows CI suite](https://github.com/luizfelippe-dev/pirate-battle/actions/runs/36769317273). It loaded the ranking through MSW, survived refresh, preserved the mouse preference, exercised mouse fire with reverse movement, ran the normal combat clock without test hooks, paused/resumed, abandoned without recording, and completed another match. That result appeared once in ranking and history and remained available after refresh. There were no unhandled browser errors. The raw result is in [public-smoke.json](evidence/public-smoke.json).
 
 ```sh
 node scripts/smoke.mjs https://luizfelippe-dev.github.io/pirate-battle/ --complete
